@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.eqapi.mapper.EquityQueryMapper">
+
+    <!-- 单客户明细：快照表已是最新一行，无需窗口函数 -->
+    <select id="selectHoldingsFromTable"
+            resultType="com.example.eqapi.mapper.EquityQueryMapper$HoldingRow">
+        SELECT e.account_no AS accountNo,
+               e.ccy        AS ccy,
+               e.balance    AS balance,
+               to_char(e.biz_dt, 'YYYY-MM-DD HH24:MI:SS') AS bizDt
+        FROM ${table} e
+        WHERE e.customer_no = #{custNo}
+        ORDER BY e.account_no, e.ccy
+    </select>
+
+    <!-- 区间合计：余额×汇率 -->
+    <select id="sumRangeFromTable" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(e.balance * r.rate), 0)
+        FROM ${table} e
+                 JOIN base_cur r ON r.ccy = e.ccy
+        WHERE e.customer_no BETWEEN #{min} AND #{max}
+    </select>
+
+</mapper>

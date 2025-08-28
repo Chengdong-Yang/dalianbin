@@ -1,0 +1,17 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/mydb
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+
+equity:
+  shards: 16
+  table-prefix: tb_customer_equity_
+  parallelism: 16   # 应用层并行度（接口2）

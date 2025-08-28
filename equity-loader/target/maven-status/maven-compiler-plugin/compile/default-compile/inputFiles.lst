@@ -1,0 +1,10 @@
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/service/CopyRelationLoadService.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/service/impl/CopyRelationLoadServiceImpl.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/mapper/EquityMapper.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/runner/BootstrapRunner.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/service/impl/CopyLoadServiceImpl.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/Application.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/config/TableRouteContext.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/entity/Equity.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/service/CopyLoadService.java
+/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/java/com/example/loader/config/MybatisPlusConfig.java

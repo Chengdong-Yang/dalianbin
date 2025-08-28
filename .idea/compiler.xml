@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="equity-loader" />
+        <module name="equity-query-api" />
+        <module name="mq-consumer-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="boc_practice" target="1.5" />
+      <module name="equity-loader" target="1.8" />
+      <module name="equity-query-api" target="1.8" />
+      <module name="equity-service" target="1.8" />
+      <module name="mq-consumer-service" target="1.8" />
+      <module name="mq-equity-demo" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="equity-loader" options="-parameters" />
+      <module name="equity-query-api" options="-parameters" />
+      <module name="equity-service" options="-parameters" />
+      <module name="mq-consumer-service" options="-parameters" />
+      <module name="mq-equity-demo" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,40 @@
+server:
+  port: 9001
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+app:
+  stat-dir: ${STAT_DIR:/tmp/8424227}
+
+pulsar:
+  consumer:
+    subscription-name: ${SUBSCRIPTION_NAME:equity-sub}
+smoketest:
+  enabled: false
+
+#pulsar:
+#  service-url: pulsar://tdmq2broker-nm.t.bocsys.cn:6650
+#  auth-plugin-class-name: org.apache.pulsar.client.impl.auth.AuthenticationToken
+#  auth-params: eyJrZXIJZC16InB1bHNhci03ajhicjU4YXhIZWUiLCJhbGciOiJIUzI1NiJ9...
+#  tenant: pulsar-7j8br58axeee
+#  namespace: public_namespace
+#  topic: skill_competition
+#  subscription-name: ${SUBSCRIPTION_NAME:equity-sub}
+#  subscription-type: Shared
+
+
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver   # GaussDB 和 openGauss 用 PG 驱动
+#    url: jdbc:postgresql://${gaussdbIpPort}/${gaussdbDatabase}?currentSchema=${gaussdbSchema}
+#    username: ${gaussdbUser}
+#    password: ${gaussdbPwd}
+#    hikari:
+#      maximum-pool-size: 20
+#      minimum-idle: 2
+#      connection-timeout: 30000
+#      idle-timeout: 600000
+#      max-lifetime: 1800000

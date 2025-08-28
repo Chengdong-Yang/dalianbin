@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/boc_practice.iml" filepath="$PROJECT_DIR$/.idea/boc_practice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/equity-loader/equity-loader.iml" filepath="$PROJECT_DIR$/equity-loader/equity-loader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/equity-query-api/equity-query-api.iml" filepath="$PROJECT_DIR$/equity-query-api/equity-query-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mq-consumer-service/mq-consumer-service.iml" filepath="$PROJECT_DIR$/mq-consumer-service/mq-consumer-service.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,11 @@
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/model/TradeMessage.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/mapper/EquityMapper.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/mapper/DailyAggMapper.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/mapper/InboxMapper.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/MqConsumerServiceApplication.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/service/EquityService.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/consumer/EquityConsumer.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/service/RateCacheService.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/mapper/RateMapper.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/service/MqMetrics.java
+/Users/yangchengdong/Desktop/boc_practice/mq-consumer-service/src/main/java/com/example/mq/service/HandleMessageSmokeTest.java

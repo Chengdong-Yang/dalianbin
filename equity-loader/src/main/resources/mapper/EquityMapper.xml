@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.loader.mapper.EquityMapper">
+    <!--
+      这里保留空 XML，便于后续扩展：
+      - 如果 COPY 不可用，可添加一个 insertBatch 的多值插入语句作为备选。
+      - 例如：
+        <insert id="insertBatch">
+          INSERT INTO ${table} (biz_dt, customer_no, account_no, ccy, balance)
+          VALUES
+          <foreach collection="list" item="e" separator=",">
+            (#{e.bizDt}, #{e.customerNo}, #{e.accountNo}, #{e.ccy}, #{e.balance})
+          </foreach>
+        </insert>
+    -->
+</mapper>

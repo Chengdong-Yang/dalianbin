@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.eqapi.mapper.AggDailyMapper">
+
+    <!-- 返回日期-客户维度的明细，不做 GROUP BY；由表内 (ymd, customer_no) 唯一保障 -->
+    <select id="listManagerDailyPerCustFromTable"
+            resultType="com.example.eqapi.mapper.AggDailyMapper$CustDayRow">
+        SELECT
+        ymd,
+        customer_no AS custNo,
+        amount_cny  AS amount
+        FROM ${table}
+        WHERE customer_no IN
+        <foreach collection="custList" item="c" open="(" separator="," close=")">
+            #{c}
+        </foreach>
+        ORDER BY ymd, customer_no
+    </select>
+
+</mapper>

@@ -1,0 +1,11 @@
+com/example/loader/service/impl/CopyRelationLoadServiceImpl.class
+com/example/loader/config/TableRouteContext.class
+com/example/loader/entity/Equity.class
+com/example/loader/config/MybatisPlusConfig.class
+com/example/loader/config/MybatisPlusConfig$DynamicNameHandler.class
+com/example/loader/service/CopyLoadService.class
+com/example/loader/service/CopyRelationLoadService.class
+com/example/loader/runner/BootstrapRunner.class
+com/example/loader/Application.class
+com/example/loader/mapper/EquityMapper.class
+com/example/loader/service/impl/CopyLoadServiceImpl.class

@@ -1,0 +1,38 @@
+server:
+  port: 9000
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 16
+      minimum-idle: 2
+      auto-commit: true
+      connection-timeout: 30000
+  main:
+    banner-mode: log
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:/mapper/*.xml
+
+loader:
+  enabled: true   # 改为 true 即可在启动时执行装载
+  shards: 16
+  tablePrefix: tb_customer_equity_
+  badFileSuffix: .bad
+  relation:
+    enabled: true                # ← 需要导入关系文件时设为 true
+    tableName: tb_customer_relation
+
+logging:
+  level:
+    root: INFO
+    com.example.loader: INFO
+
+#  export FILE_PATH=/Users/yangchengdong/Downloads/mp-gauss-equity-loader-with-comments/src/main/resources/scripts
+#  export FILE_NAME_EQUITY=file_name_equity.txt
+#  export FILE_NAME_RELATION=file_name_relation.txt
