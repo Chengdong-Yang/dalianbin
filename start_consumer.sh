@@ -35,7 +35,7 @@ export STAT_DIR="${STAT_DIR:-/tmp/8424227}"
 MQ_OK_FILE="${STAT_DIR}/mq.ok"
 
 # “静默窗口”秒数：这段时间 mq.ok 不增长就认为无新消息
-QUIET_SECS="${QUIET_SECS:-60}"
+QUIET_SECS="${QUIET_SECS:-30}"
 # 轮询间隔
 POLL_INTERVAL="${POLL_INTERVAL:-5}"
 # 停止消费者的等待时间（秒）

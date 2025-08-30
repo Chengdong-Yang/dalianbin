@@ -112,14 +112,14 @@ public class CopyLoadServiceImpl implements CopyLoadService {
                 String ccy = ccyRaw.toUpperCase();
 
                 // balance：数值
-                if (!isDecimal(balRaw)) { badOut.write(line); badOut.newLine(); bad++; continue; }
+                if (!balRaw.matches("^-?\\d{1,18}(\\.\\d{1,2})?$")) { badOut.write(line); badOut.newLine(); bad++; continue; }
                 String bal = balRaw;
 
                 // 重新按原分隔符拼接一行，末尾必须加换行（COPY 按行切分）
                 String out = tsRaw+ "|" + cust + "|" + acc + "|" + ccy + "|" + bal + "\n";
 
                 // 路由到目标分片：用客户号取模，分布较均匀
-                int shard = (Integer.parseInt(cust) % shards);
+                int shard = (int)(Long.parseLong(cust) % shards);
                 queues[shard].put(out.getBytes(StandardCharsets.UTF_8)); // 阻塞式放入
                 ok++;
 
@@ -154,38 +154,46 @@ public class CopyLoadServiceImpl implements CopyLoadService {
         String table = tablePrefix + String.format("%02d", shard + 1);
         String copySql = "COPY " + table +
                 " (biz_dt, customer_no, account_no, ccy, balance) FROM STDIN WITH (FORMAT text, DELIMITER '|')";
-        try (Connection conn = dataSource.getConnection()) {
-            // PG 兼容驱动提供的 CopyManager
-            CopyManager cm = new CopyManager(conn.unwrap(BaseConnection.class));
 
-            // Pipe：生产者（feeder）向 pipeOut 写，CopyManager 从 pipeIn 读
-            PipedOutputStream pipeOut = new PipedOutputStream();
-            PipedInputStream pipeIn = new PipedInputStream(pipeOut, 8 * 1024 * 1024); // 8MB 缓冲
+        long total = 0L;
+        final int BATCH_SIZE = 50000; // 每批5万行，按需调大调小
+        try {
+            while (true) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                int count = 0;
 
-            Thread feeder = new Thread(() -> {
-                try (OutputStream os = pipeOut) {
-                    while (true) {
-                        // 500ms 轮询，减少空转；若读已结束且队列为空，则退出
-                        byte[] b = queues[shard].poll(500, TimeUnit.MILLISECONDS);
-                        if (b != null) {
-                            os.write(b);
-                        } else if (finished[0] && queues[shard].isEmpty()) {
-                            break;
-                        }
+                // 从队列取一批
+                while (count < BATCH_SIZE) {
+                    byte[] line = queues[shard].poll(500, TimeUnit.MILLISECONDS);
+                    if (line != null) {
+                        baos.write(line);
+                        count++;
+                    } else if (finished[0] && queues[shard].isEmpty()) {
+                        break;
                     }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
                 }
-            }, "feeder-" + (shard+1));
 
-            feeder.start();
-            long n = cm.copyIn(copySql, pipeIn); // 阻塞至 feeder 关闭输出流
-            feeder.join();
-            log.info("{} copied rows = {}", table, n);
+                if (count > 0) {
+                    try (Connection conn = dataSource.getConnection()) {
+                        CopyManager cm = new CopyManager(conn.unwrap(BaseConnection.class));
+                        long n = cm.copyIn(copySql, new ByteArrayInputStream(baos.toByteArray()));
+                        total += n;
+                        // 每批打印日志
+                        log.info("{} imported batch {} rows, total={}", table, n, total);
+                    }
+                }
+
+                // 读线程结束 & 队列空，跳出循环
+                if (finished[0] && queues[shard].isEmpty()) {
+                    break;
+                }
+            }
+            log.info("{} copied rows = {}", table, total);
         } catch (Exception e) {
-            throw new RuntimeException("copyWorker " + (shard+1), e);
+            throw new RuntimeException("copyWorker " + (shard + 1), e);
         }
     }
+
 
     // ======== 基础校验工具 ========
     // ======== 工具 ========

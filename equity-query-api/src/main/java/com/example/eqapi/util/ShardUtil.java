@@ -4,7 +4,7 @@ public class ShardUtil {
     /** 客户号按数字取模，返回 "01".."16" */
     public static String shardSuffix(String custNo) {
         String s = leftPad10(custNo);
-        int n = Integer.parseInt(s);
+        int n = (int)Long.parseLong(s);
         int idx = (n % 16) + 1;
         return String.format("%02d", idx);
     }

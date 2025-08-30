@@ -52,13 +52,29 @@ public class TradeMessage {
 
         // 7) 金额
         double amt;
-        try { amt = new BigDecimal(parts[6].trim()).doubleValue(); }
-        catch (Exception e){ throw new IllegalArgumentException("amount"); }
+        try {
+            String amountStr = parts[6].trim();
+            // 校验格式：整数最多18位，小数最多2位
+            if (!amountStr.matches("^-?\\d{1,18}(\\.\\d{1,2})?$")) {
+                throw new IllegalArgumentException("amount格式错误：整数最多18位，小数最多2位");
+            }
+            amt = new BigDecimal(amountStr).doubleValue();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("amount解析失败: " + e.getMessage());
+        }
 
         // 8) 后余额
         double bal;
-        try { bal = new BigDecimal(parts[7].trim()).doubleValue(); }
-        catch (Exception e){ throw new IllegalArgumentException("balance"); }
+        try {
+            String balanceStr = parts[7].trim();
+            // 校验格式：整数最多18位，小数最多2位
+            if (!balanceStr.matches("^-?\\d{1,18}(\\.\\d{1,2})?$")) {
+                throw new IllegalArgumentException("balance格式错误：整数最多18位，小数最多2位");
+            }
+            bal = new BigDecimal(balanceStr).doubleValue();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("balance解析失败: " + e.getMessage());
+        }
 
         TradeMessage m = new TradeMessage();
         m.setBizDt(bizDt);

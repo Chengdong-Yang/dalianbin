@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 9006
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/mydb
@@ -33,6 +33,19 @@ logging:
     root: INFO
     com.example.loader: INFO
 
-#  export FILE_PATH=/Users/yangchengdong/Downloads/mp-gauss-equity-loader-with-comments/src/main/resources/scripts
+#  export FILE_PATH=/Users/yangchengdong/Desktop/boc_practice/equity-loader/src/main/resources/scripts
 #  export FILE_NAME_EQUITY=file_name_equity.txt
 #  export FILE_NAME_RELATION=file_name_relation.txt
+
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://${gaussdbIpPort}/${gaussdbDatabase}?currentSchema=${gaussdbSchema}&targetServerType=primary
+#    username: ${gaussdbUser}
+#    password: ${gaussdbPwd}
+#    hikari:
+#      maximum-pool-size: 20
+#      minimum-idle: 5
+#      connection-timeout: 30000
+#      idle-timeout: 600000
+#      max-lifetime: 1800000
