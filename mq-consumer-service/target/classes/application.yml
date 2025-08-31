@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9007
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/mydb
@@ -9,11 +9,29 @@ spring:
 app:
   stat-dir: ${STAT_DIR:/tmp/8424227}
 
-pulsar:
-  consumer:
-    subscription-name: ${SUBSCRIPTION_NAME:equity-sub}
 smoketest:
   enabled: false
+
+
+pulsar:
+  url: pulsar://localhost:6650
+  topic: persistent://public/default/my-new-topic
+  subscription: equity-sub
+  token: ""        # 有就填，无就留空
+  threads: 4       # 消费线程数
+  idle-seconds: 60 # 静默多少秒算无新消息
+  callback-url: http://82.202.169.44:6000/callback2
+  omr-acc: 8424227
+  omr-pwd: 762687ok@
+
+mq:
+  concurrency: 4        # 消费线程数
+  quiet-secs: 30        # 静默多少秒算完成
+  callback:
+    url: http://82.202.169.44:6000/callback2
+    acc: 8424227
+    pwd: 762687ok@
+
 
 #pulsar:
 #  service-url: pulsar://tdmq2broker-nm.t.bocsys.cn:6650
